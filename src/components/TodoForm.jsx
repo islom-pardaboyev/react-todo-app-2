@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Context } from "../Contexts/Context";
-import TodoList from "./TodoList";
+import TodoList from "./TodoList/TodoList";
 
 function TodoForm() {
   const { todos, saveTodo } = useContext(Context);
