@@ -4,16 +4,16 @@ import toast, { Toaster } from "react-hot-toast";
 const Context = createContext();
 
 function TodoContext({ children }) {
-  const [todos, setTodos] = useState(
-    JSON.parse(window.localStorage.getItem("todos")) || []
-  );
+  const [todos, setTodos] = useState(JSON.parse(window.localStorage.getItem("todos")) || []);
 
   // save todo start
   function saveTodo(obj) {
     if (todos.some((todo) => todo.title === obj.title)) {
       toast.error("Todo already exists!");
     } else {
-      setTodos([...todos, obj]);
+      const newTodos = [...todos, obj];
+      setTodos(newTodos);
+      
       toast.success("Added todo!");
     }
   }
@@ -21,37 +21,48 @@ function TodoContext({ children }) {
 
   // delete todo start
   function deleteTodo(id) {
-    const findedIndex = todos.findIndex((item) => item.id === id);
-    todos.splice(findedIndex, 1);
-    setTodos([...todos]);
+    const newTodos = todos.filter((item) => item.id !== id);
+    setTodos(newTodos);
+    
     toast.error("Todo Deleted!");
   }
   // delete todo end
 
   // update todo start
   function updateTodo(id, newValue) {
-    const updateObj = todos.find((item) => item.id === id);
-    updateObj.title = newValue;
+    const newTodos = todos.map((item) =>
+      item.id === id ? { ...item, title: newValue } : item
+    );
+    setTodos(newTodos);
+    
     toast.success("Todo Updated");
-    setTodos([...todos]);
   }
   // update todo end
 
   // completed todo start
   function completedTodo(id) {
-    const findedArray = todos.find((item) => item.id === id);
-    findedArray.isCompleted = !findedArray.isCompleted;
-    setTodos([...todos]);
+    const newTodos = todos.map((item) =>
+      item.id === id ? { ...item, isCompleted: !item.isCompleted } : item
+    );
+    setTodos(newTodos);
+    
   }
   // completed todo end
 
-  window.localStorage.setItem("todos", JSON.stringify(todos));
+  window.localStorage.setItem('todos', JSON.stringify(todos))
 
   return (
     <>
       <Toaster position="top-right" reverseOrder={false} />
       <Context.Provider
-        value={{ todos, setTodos, saveTodo, deleteTodo, updateTodo, completedTodo }}
+        value={{
+          todos,
+          setTodos,
+          saveTodo,
+          deleteTodo,
+          updateTodo,
+          completedTodo,
+        }}
       >
         {children}
       </Context.Provider>

@@ -9,7 +9,7 @@ function TodoForm() {
     evt.preventDefault();
     const todo = {
       id: Date.now(),
-      title: evt.target[0].value.trim(),
+      title: evt.target.todoValue.value.trim(),
       isCompleted: false,
       date: new Date().toLocaleTimeString(),
     };

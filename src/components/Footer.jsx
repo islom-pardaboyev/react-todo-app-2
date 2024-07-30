@@ -8,6 +8,7 @@ const Footer = () => {
         href="https://t.me/IslomPardaboyev"
         className="underline decoration-sky-500 text-sky-500"
         target="_blank"
+        rel="noopener noreferrer"
       >
         Islom
       </a>

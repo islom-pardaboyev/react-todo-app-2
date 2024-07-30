@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../../Contexts/Context";
 import Modal from "../Modal";
-import "./Complated.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function TodoList() {
@@ -32,7 +31,7 @@ function TodoList() {
             key={index + 1}
             className={`${
               item.isCompleted ? "complated opacity-50" : ""
-            } relative min-h-[70px] flex items-center  pr-2 text-center justify-between even:bg-gradient-to-r even:from-sky-500 even:to-teal-500 even:text-white text-black py-3 border-b border-b-black`}
+            } relative min-h-[70px] flex items-center pr-2 text-center justify-between even:bg-gradient-to-r even:from-sky-500 even:to-teal-500 even:text-white text-black py-3 border-b border-b-black`}
           >
             <span className="min-w-[5%] font-bold">{index + 1}.</span>
             <strong className="capitalize text-xs min-w-[8%] max-w-[8%]">
