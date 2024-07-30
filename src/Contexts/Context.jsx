@@ -21,7 +21,7 @@ function TodoContext({ children }) {
 
   // delete todo start
   function deleteTodo(id) {
-    const findedIndex = todos.findIndex((item) => item.id == id);
+    const findedIndex = todos.findIndex((item) => item.id === id);
     todos.splice(findedIndex, 1);
     setTodos([...todos]);
     toast.error("Todo Deleted!");
@@ -30,21 +30,20 @@ function TodoContext({ children }) {
 
   // update todo start
   function updateTodo(id, newValue) {
-    const updateObj = todos.find((item) => item.id == id);
+    const updateObj = todos.find((item) => item.id === id);
     updateObj.title = newValue;
-    toast.success("Todo Updated")
+    toast.success("Todo Updated");
     setTodos([...todos]);
   }
   // update todo end
 
-
-  // complated todo start
-  function complatedTodo(id){
-    const findedArray = todos.find((item) => item.id == id);
-    findedArray.isComplated = !findedArray.isComplated
+  // completed todo start
+  function completedTodo(id) {
+    const findedArray = todos.find((item) => item.id === id);
+    findedArray.isCompleted = !findedArray.isCompleted;
     setTodos([...todos]);
   }
-  // complated todo end
+  // completed todo end
 
   window.localStorage.setItem("todos", JSON.stringify(todos));
 
@@ -52,7 +51,7 @@ function TodoContext({ children }) {
     <>
       <Toaster position="top-right" reverseOrder={false} />
       <Context.Provider
-        value={{ todos, setTodos, saveTodo, deleteTodo, updateTodo, complatedTodo }}
+        value={{ todos, setTodos, saveTodo, deleteTodo, updateTodo, completedTodo }}
       >
         {children}
       </Context.Provider>
